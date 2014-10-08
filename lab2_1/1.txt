@@ -1,0 +1,112 @@
+class Matrix
+{
+public:
+	int m, n, **mass;
+	Matrix ();
+	Matrix (int a, int b);
+	Matrix (const Matrix &o);		//конструктор копирования
+	~Matrix ();
+
+	static Matrix operator+(Matrix &o1, Matrix &o2);
+	static Matrix operator-(Matrix &o1, Matrix &o2);
+	static Matrix operator*(Matrix &o1, Matrix &o2);
+	static Matrix operator*(int a, Matrix &o2);
+
+
+private:
+
+};
+
+Matrix::Matrix()
+{
+	m = n = 1;
+	mass = new int*[m];
+	for(int i = 0; i < m; i++)
+	{
+		mass[i] = new int [n];
+	}
+}
+
+Matrix::Matrix(int a, int b) {
+	m = a;
+	n = b;
+
+	mass = new int*[m];
+	for(int i = 0; i < m; i++)
+	{
+		mass[i] = new int [n];
+	}
+}
+
+Matrix::Matrix(const Matrix &o) {//конструктор(копирует оттуда-то по ссылке)
+	mass = new int*[o.m];
+	for (int i = 0; i < o.m; i++)
+	{
+		mass[i] = new int [o.n];
+	}
+
+	for (int i = 0; i < o.m; i++)
+	{
+		for (int j = 0; j < o.n; j++)
+		{
+			mass[i][j] = o.mass[i][j];
+		}
+	}
+}
+
+Matrix::~Matrix()
+{
+	for(int i = 0; i < n; i++)
+	{
+		delete[] mass[i];
+	}
+	delete[] mass;
+
+	cout << "Prog is dead!";
+}
+
+static Matrix operator+(Matrix &o1, Matrix &o2) {
+	if ((o1.m == o2.m) && (o1.n == o2.n)) {
+		Matrix add = Matrix(o1.m, o1.n);
+		for (int i = 0; i < o1.m; i++)
+		{
+			for (int j = 0; j < o1.n; j++)
+			{
+				add.mass[i][j] = o1.mass[i][j] + o2.mass[i][j];
+			}
+		}
+		return add;
+	}
+}
+
+static Matrix operator-(Matrix &o1, Matrix &o2) {
+	if ((o1.m == o2.m) && (o1.n == o2.n)) {
+		Matrix dic = Matrix(o1.m, o1.n);
+		for (int i = 0; i < o1.m; i++)
+		{
+			for (int j = 0; j < o1.n; j++)
+			{
+				dic.mass[i][j] = o1.mass[i][j] - o2.mass[i][j];
+			}
+		}
+		return dic;
+	}
+}
+
+	static Matrix operator*(Matrix &o1, Matrix &o2) {
+
+	}
+
+Matrix R = Matrix(o1.m, o2.n);
+for (int i = 0; i < o1.m; i++) {
+	for (int j = 0; j < o2.n; j++) {
+		R.mass[i][j] = 0; 
+		for (int k = 0; k < o1.n; k++) {
+			R.mass[i][j] = R.mass[i][j] + G.mass[i][k]*H.mass[k][j];
+		}
+	}
+}	
+
+int* operator [] (int i){return mass[i];}
+int& operator [][] (const int i, const int j);
+

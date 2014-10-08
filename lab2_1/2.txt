@@ -1,0 +1,24 @@
+
+matrix matrix::operator +(const matrix& b) const {
+if (!((this->n == b.n)&&(this->m == b.m)))
+{
+cout«"operator=: Error n!=m\n";
+exit(1);
+}
+matrix c(b.n, b.m);
+for (int i = 0; i < n; i++)
+{
+for (int j = 0; j < m; j++)
+{
+c[i][j] = a[i][j] + b[i][j];
+}
+}
+cout«c«"\n";
+system("pause");
+return c;
+}
+
+for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++) b[i][j] = i+j;
+
+friend ostream& operator<<(ostream& ot, const Matrix& o1);
